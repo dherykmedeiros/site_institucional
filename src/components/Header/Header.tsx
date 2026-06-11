@@ -1,150 +1,108 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styles from "./Header.module.css";
 
+const NAV_ITEMS = [
+  { label: "Início", href: "#inicio" },
+  { label: "Sobre", href: "#sobre" },
+  { label: "Serviços", href: "#servicos" },
+  { label: "Diferenciais", href: "#diferenciais" },
+  { label: "Contato", href: "#contato" },
+];
+
+const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5585999000534";
+
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   return (
-    <>
-      <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
-        <div className={`container ${styles.container}`}>
-          {/* Typographic Logo with SVG */}
-          <a href="#home" className={styles.logo} onClick={closeMenu}>
-            <svg
-              className={styles.logoIcon}
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-            <span className={styles.logoText}>
-              CENA<span className={styles.logoSub}>DT</span>
-            </span>
-          </a>
+    <header
+      className={`${styles.header} ${scrolled ? styles.headerScrolled : ""}`}
+    >
+      <div className={styles.headerInner}>
+        {/* Logo */}
+        <a href="#inicio" className={styles.logo}>
+          CENA<span className={styles.logoAccent}>DT</span>
+        </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className={styles.nav}>
-            <a href="#home" className={styles.navLink}>Início</a>
-            <a href="#sobre" className={styles.navLink}>Sobre Nós</a>
-            <a href="#servicos" className={styles.navLink}>Cursos & Serviços</a>
-            <a href="#diferenciais" className={styles.navLink}>Diferenciais</a>
-            <a href="#processo" className={styles.navLink}>Como Funciona</a>
-            <a href="#depoimentos" className={styles.navLink}>Depoimentos</a>
-            <a href="#faq" className={styles.navLink}>FAQ</a>
-          </nav>
-
-          {/* Action Buttons */}
-          <div className={styles.actions}>
-            <a
-              href="https://api.whatsapp.com/send?phone=5585999000534&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20cursos%20e%20serviços%20da%20CENADT."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline-blue"
-              style={{ padding: '0.55rem 1.15rem', fontSize: '0.85rem' }}
-            >
-              Portal do Aluno
+        {/* Desktop Nav */}
+        <nav className={styles.nav}>
+          {NAV_ITEMS.map((item) => (
+            <a key={item.href} href={item.href} className={styles.navLink}>
+              {item.label}
             </a>
-            <a
-              href="#cta"
-              className="btn btn-primary"
-              style={{ padding: '0.55rem 1.15rem', fontSize: '0.85rem' }}
-            >
-              Falar com Consultor
-            </a>
-          </div>
+          ))}
+        </nav>
 
-          {/* Mobile Hamburguer Toggle */}
-          <button
-            className={`${styles.burger} ${isMenuOpen ? styles.burgerActive : ""}`}
-            onClick={toggleMenu}
-            aria-label="Abrir Menu de Navegação"
-            aria-expanded={isMenuOpen}
-          >
-            <span className={styles.burgerLine}></span>
-            <span className={styles.burgerLine}></span>
-            <span className={styles.burgerLine}></span>
-          </button>
-        </div>
-      </header>
+        {/* Desktop CTA */}
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${styles.cta} ${styles.ctaDesktop}`}
+        >
+          Fale Conosco
+        </a>
 
-      {/* Backdrop for mobile drawer */}
+        {/* Hamburger */}
+        <button
+          className={`${styles.hamburger} ${mobileOpen ? styles.hamburgerOpen : ""}`}
+          onClick={() => setMobileOpen((prev) => !prev)}
+          aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={mobileOpen}
+        >
+          <span className={styles.hamburgerLine} />
+          <span className={styles.hamburgerLine} />
+          <span className={styles.hamburgerLine} />
+        </button>
+      </div>
+
+      {/* Mobile Overlay */}
       <div
-        className={`${styles.backdrop} ${isMenuOpen ? styles.backdropActive : ""}`}
-        onClick={closeMenu}
-      ></div>
-
-      {/* Mobile Drawer */}
-      <nav className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuActive : ""}`}>
-        <a href="#home" className={styles.mobileNavLink} onClick={closeMenu}>
-          Início
-        </a>
-        <a href="#sobre" className={styles.mobileNavLink} onClick={closeMenu}>
-          Sobre Nós
-        </a>
-        <a href="#servicos" className={styles.mobileNavLink} onClick={closeMenu}>
-          Cursos & Serviços
-        </a>
-        <a href="#diferenciais" className={styles.mobileNavLink} onClick={closeMenu}>
-          Diferenciais
-        </a>
-        <a href="#processo" className={styles.mobileNavLink} onClick={closeMenu}>
-          Como Funciona
-        </a>
-        <a href="#depoimentos" className={styles.mobileNavLink} onClick={closeMenu}>
-          Depoimentos
-        </a>
-        <a href="#faq" className={styles.mobileNavLink} onClick={closeMenu}>
-          FAQ
-        </a>
-        <div className={styles.mobileActions}>
+        className={`${styles.mobileOverlay} ${mobileOpen ? styles.mobileOverlayOpen : ""}`}
+      >
+        {NAV_ITEMS.map((item) => (
           <a
-            href="https://api.whatsapp.com/send?phone=5585999000534&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20cursos%20e%20serviços%20da%20CENADT."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-secondary"
-            onClick={closeMenu}
+            key={item.href}
+            href={item.href}
+            className={styles.mobileNavLink}
+            onClick={closeMobile}
           >
-            Portal do Aluno
+            {item.label}
           </a>
-          <a
-            href="#cta"
-            className="btn btn-primary"
-            onClick={closeMenu}
-          >
-            Falar com Consultor
-          </a>
-        </div>
-      </nav>
-    </>
+        ))}
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.mobileCta}
+          onClick={closeMobile}
+        >
+          Fale Conosco
+        </a>
+      </div>
+    </header>
   );
 }

@@ -1,174 +1,155 @@
 .footer {
+  padding: 5rem 0 0;
   background-color: var(--bg-secondary);
-  border-top: 1px solid var(--border-color);
-  padding: 6rem 0 2.5rem 0;
-  position: relative;
-  z-index: 2;
+  border-top: 1px solid var(--border);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
   gap: 3rem;
-  margin-bottom: 4rem;
+  padding-bottom: 4rem;
 }
 
-@media (max-width: 992px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-}
-
-/* Column 1 - Brand Info */
-.brandCol {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
+/* Brand column */
 .logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 1.5rem;
-  color: var(--text-primary);
+  text-decoration: none;
+  margin-bottom: 1.25rem;
 }
 
-.logoIcon {
-  color: var(--color-accent);
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
 }
 
 .logoSub {
-  color: var(--color-accent);
+  color: var(--accent);
 }
 
 .brandDesc {
   font-size: 0.9rem;
-  line-height: 1.6;
   color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 280px;
 }
 
-.socials {
-  display: flex;
-  gap: 1rem;
-}
-
-.socialLink {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  transition: all var(--transition-fast);
-}
-
-.socialLink:hover {
-  background-color: var(--color-accent);
-  color: #fff;
-  border-color: var(--color-accent);
-  transform: translateY(-2px);
-}
-
-/* Link Columns */
+/* Column titles */
 .colTitle {
-  font-size: 1.05rem;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
   color: var(--text-primary);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
 }
 
+/* Link lists */
 .linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
 .linkItem a {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  transition: all var(--transition-fast);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .linkItem a:hover {
   color: var(--text-primary);
-  padding-left: 0.25rem;
 }
 
-/* Contact Column */
+/* Contact column */
 .contactList {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.75rem;
 }
 
-.contactItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
+.contactLine {
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.5;
 }
 
-.contactIcon {
-  color: var(--color-accent);
-  margin-top: 0.2rem;
-  flex-shrink: 0;
+.contactLine a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-/* Bottom Bar */
+.contactLine a:hover {
+  color: var(--text-primary);
+}
+
+/* Bottom bar */
 .bottom {
-  border-top: 1px solid var(--border-color);
-  padding-top: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 0.75rem;
 }
 
-@media (max-width: 768px) {
-  .bottom {
-    flex-direction: column;
-    text-align: center;
-  }
+.copyright {
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
 .legal {
   display: flex;
-  gap: 1rem;
   align-items: center;
-}
-
-@media (max-width: 576px) {
-  .legal {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+  gap: 1.5rem;
 }
 
 .cnpj {
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-color);
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.03em;
+}
+
+.credit {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .legal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }

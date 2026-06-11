@@ -16,7 +16,7 @@ const outfit = Outfit({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#060b13",
+  themeColor: "#09090b",
   width: "device-width",
   initialScale: 1,
 };
