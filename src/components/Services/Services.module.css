@@ -1,0 +1,210 @@
+.services {
+  padding: 8rem 0;
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+/* Tabs Navigation */
+.tabsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+@media (max-width: 576px) {
+  .tabsContainer {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 1rem;
+  }
+}
+
+.tabBtn {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.tabBtn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border-color: var(--border-color-hover);
+}
+
+.tabBtnActive {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 20px rgba(var(--color-accent-rgb), 0.2);
+}
+
+.tabBtnActiveBlue {
+  background: var(--color-blue);
+  color: #fff;
+  border-color: var(--color-blue);
+  box-shadow: 0 4px 20px rgba(var(--color-blue-rgb), 0.2);
+}
+
+/* Services Grid with Fade In */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  animation: fadeIn var(--transition-normal) forwards;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: transparent;
+  transition: background-color var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-color-hover);
+  background-color: rgba(255, 255, 255, 0.03);
+  box-shadow: var(--glass-shadow);
+}
+
+.cardOrange:hover::before {
+  background: linear-gradient(90deg, var(--color-accent) 0%, #ff8c00 100%);
+}
+
+.cardBlue:hover::before {
+  background: linear-gradient(90deg, var(--color-blue) 0%, #38bdf8 100%);
+}
+
+.iconWrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  transition: transform var(--transition-normal);
+}
+
+.iconOrange {
+  background-color: rgba(var(--color-accent-rgb), 0.1);
+  color: var(--color-accent);
+}
+
+.iconBlue {
+  background-color: rgba(var(--color-blue-rgb), 0.1);
+  color: var(--color-blue);
+}
+
+.card:hover .iconWrapper {
+  transform: scale(1.08) rotate(2deg);
+}
+
+.cardTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.25rem;
+  margin-top: auto;
+}
+
+.duration {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cardLink {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: gap var(--transition-fast);
+}
+
+.linkOrange {
+  color: var(--color-accent);
+}
+
+.linkBlue {
+  color: var(--color-blue);
+}
+
+.card:hover .cardLink {
+  gap: 0.5rem;
+}

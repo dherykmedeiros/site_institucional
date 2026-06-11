@@ -1,0 +1,133 @@
+.about {
+  padding: 8rem 0;
+  position: relative;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(var(--color-blue-rgb), 0.03) 0%, transparent 60%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+
+.description {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.visionBox {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.visionTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.visionText {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Right Side - Metrics Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2.25rem 1.5rem;
+  text-align: center;
+  transition: transform var(--transition-normal), border-color var(--transition-normal), background-color var(--transition-normal);
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-color-hover);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.statNum {
+  font-size: 2.8rem;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.statDesc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
