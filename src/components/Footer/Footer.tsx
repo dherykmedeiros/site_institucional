@@ -1,7 +1,24 @@
 import styles from "./Footer.module.css";
+import { defaultContent } from "@/lib/defaultContent";
 
-export default function Footer() {
+interface FooterProps {
+  footer?: typeof defaultContent.footer;
+  general?: typeof defaultContent.general;
+}
+
+export default function Footer({ footer, general }: FooterProps) {
   const currentYear = new Date().getFullYear();
+
+  const logoText = general?.logoText ?? defaultContent.general.logoText;
+  const logoSub = general?.logoSub ?? defaultContent.general.logoSub;
+  const logoImage = general?.logoImage ?? defaultContent.general.logoImage;
+
+  const brandDesc = footer?.brandDesc ?? defaultContent.footer.brandDesc;
+  const address = footer?.address ?? defaultContent.footer.address;
+  const phones = footer?.phones ?? defaultContent.footer.phones;
+  const emails = footer?.emails ?? defaultContent.footer.emails;
+  const cnpj = footer?.cnpj ?? defaultContent.footer.cnpj;
+  const credit = footer?.credit ?? defaultContent.footer.credit;
 
   return (
     <footer className={styles.footer}>
@@ -9,15 +26,17 @@ export default function Footer() {
         <div className={styles.grid}>
           {/* Column 1: Brand */}
           <div>
-            <a href="#home" className={styles.logo}>
-              <span className={styles.logoText}>
-                CENA<span className={styles.logoSub}>DT</span>
-              </span>
+            <a href="#inicio" className={styles.logo}>
+              {logoImage ? (
+                <img src={logoImage} alt="CENADT Logo" style={{ maxHeight: "40px", width: "auto" }} />
+              ) : (
+                <span className={styles.logoText}>
+                  {logoText}<span className={styles.logoSub}>{logoSub}</span>
+                </span>
+              )}
             </a>
             <p className={styles.brandDesc}>
-              Referência em educação profissional e engenharia de segurança
-              contra incêndios. Qualidade na formação, sucesso na profissão.
-              Maranguape, Ceará.
+              {brandDesc}
             </p>
           </div>
 
@@ -26,7 +45,7 @@ export default function Footer() {
             <h3 className={styles.colTitle}>Navegação</h3>
             <ul className={styles.linkList}>
               <li className={styles.linkItem}>
-                <a href="#home">Início</a>
+                <a href="#inicio">Início</a>
               </li>
               <li className={styles.linkItem}>
                 <a href="#sobre">Sobre Nós</a>
@@ -66,21 +85,17 @@ export default function Footer() {
           <div>
             <h3 className={styles.colTitle}>Contato</h3>
             <div className={styles.contactList}>
-              <p className={styles.contactLine}>Maranguape — Ceará, Brasil</p>
-              <p className={styles.contactLine}>
-                <a href="tel:+5585999000534">(85) 99900-0534</a>
-              </p>
-              <p className={styles.contactLine}>
-                <a href="tel:+5585981906077">(85) 98190-6077</a>
-              </p>
-              <p className={styles.contactLine}>
-                <a href="mailto:cenadt@cenadt.com">cenadt@cenadt.com</a>
-              </p>
-              <p className={styles.contactLine}>
-                <a href="mailto:cenadt.treinamentos@gmail.com">
-                  cenadt.treinamentos@gmail.com
-                </a>
-              </p>
+              <p className={styles.contactLine}>{address}</p>
+              {phones.map((phone, i) => (
+                <p key={i} className={styles.contactLine}>
+                  <a href={phone.number}>{phone.label}</a>
+                </p>
+              ))}
+              {emails.map((email, i) => (
+                <p key={i} className={styles.contactLine}>
+                  <a href={email.address}>{email.label}</a>
+                </p>
+              ))}
             </div>
           </div>
         </div>
@@ -88,13 +103,13 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className={styles.bottom}>
           <span className={styles.copyright}>
-            &copy; {currentYear} CENADT — Centro Avançado de Treinamentos &amp;
+            &copy; {currentYear} {logoText}{logoSub} — Centro Avançado de Treinamentos &amp;
             Serviços. Todos os direitos reservados.
           </span>
 
           <div className={styles.legal}>
-            <span className={styles.cnpj}>CNPJ 26.375.818/0001-82</span>
-            <span className={styles.credit}>Desenvolvido com Alto Padrão</span>
+            <span className={styles.cnpj}>{cnpj}</span>
+            <span className={styles.credit}>{credit}</span>
           </div>
         </div>
       </div>

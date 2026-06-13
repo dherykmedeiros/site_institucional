@@ -2,20 +2,22 @@
 
 import { useState, useEffect, useCallback } from "react";
 import styles from "./Header.module.css";
+import { defaultContent } from "@/lib/defaultContent";
 
-const NAV_ITEMS = [
-  { label: "Início", href: "#inicio" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Serviços", href: "#servicos" },
-  { label: "Diferenciais", href: "#diferenciais" },
-  { label: "Contato", href: "#contato" },
-];
+interface HeaderProps {
+  general?: typeof defaultContent.general;
+  header?: typeof defaultContent.header;
+}
 
-const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5585999000534";
-
-export default function Header() {
+export default function Header({ general, header }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const logoText = general?.logoText ?? defaultContent.general.logoText;
+  const logoSub = general?.logoSub ?? defaultContent.general.logoSub;
+  const logoImage = general?.logoImage ?? defaultContent.general.logoImage;
+  const whatsappUrl = general?.whatsappUrl ?? defaultContent.general.whatsappUrl;
+  const navItems = header?.navItems ?? defaultContent.header.navItems;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -44,12 +46,18 @@ export default function Header() {
       <div className={styles.headerInner}>
         {/* Logo */}
         <a href="#inicio" className={styles.logo}>
-          CENA<span className={styles.logoAccent}>DT</span>
+          {logoImage ? (
+            <img src={logoImage} alt="CENADT Logo" style={{ maxHeight: "40px", width: "auto" }} />
+          ) : (
+            <>
+              {logoText}<span className={styles.logoAccent}>{logoSub}</span>
+            </>
+          )}
         </a>
 
         {/* Desktop Nav */}
         <nav className={styles.nav}>
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <a key={item.href} href={item.href} className={styles.navLink}>
               {item.label}
             </a>
@@ -58,7 +66,7 @@ export default function Header() {
 
         {/* Desktop CTA */}
         <a
-          href={WHATSAPP_URL}
+          href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={`${styles.cta} ${styles.ctaDesktop}`}
@@ -83,7 +91,7 @@ export default function Header() {
       <div
         className={`${styles.mobileOverlay} ${mobileOpen ? styles.mobileOverlayOpen : ""}`}
       >
-        {NAV_ITEMS.map((item) => (
+        {navItems.map((item) => (
           <a
             key={item.href}
             href={item.href}
@@ -94,7 +102,7 @@ export default function Header() {
           </a>
         ))}
         <a
-          href={WHATSAPP_URL}
+          href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.mobileCta}

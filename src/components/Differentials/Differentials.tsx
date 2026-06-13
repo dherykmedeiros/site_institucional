@@ -1,41 +1,26 @@
 import styles from "./Differentials.module.css";
+import { defaultContent } from "@/lib/defaultContent";
 
-const items = [
-  {
-    index: "01",
-    title: "Corpo Docente de Elite",
-    desc: "Engenheiros, especialistas em segurança e veteranos das forças de salvamento com vivência real de campo.",
-  },
-  {
-    index: "02",
-    title: "Simulações Práticas Realistas",
-    desc: "Treinamentos com cenários reais de combate a incêndio, resgate em altura e evacuação de emergência.",
-  },
-  {
-    index: "03",
-    title: "Melhor Custo-Benefício",
-    desc: "Alto padrão de ensino com preços competitivos e condições flexíveis para autônomos e corporações.",
-  },
-  {
-    index: "04",
-    title: "Treinamentos In-Company",
-    desc: "Programas customizados realizados diretamente nas instalações da sua empresa, focados nos seus riscos.",
-  },
-];
+interface DifferentialsProps {
+  differentials?: typeof defaultContent.differentials;
+}
 
-export default function Differentials() {
+export default function Differentials({ differentials }: DifferentialsProps) {
+  const overline = differentials?.overline ?? defaultContent.differentials.overline;
+  const title = differentials?.title ?? defaultContent.differentials.title;
+  const paragraph = differentials?.paragraph ?? defaultContent.differentials.paragraph;
+  const items = differentials?.items ?? defaultContent.differentials.items;
+
   return (
     <section id="diferenciais" className={styles.differentials}>
       <div className="container">
         <div className={styles.grid}>
           {/* Left — Intro */}
           <div className={styles.intro}>
-            <span className={styles.overline}>Diferenciais</span>
-            <h2 className={styles.title}>O que nos torna diferentes</h2>
+            <span className={styles.overline}>{overline}</span>
+            <h2 className={styles.title}>{title}</h2>
             <p className={styles.paragraph}>
-              Unimos credibilidade técnica, metodologia eficiente e experiência
-              operacional para entregar resultados reais aos nossos alunos e
-              parceiros corporativos.
+              {paragraph}
             </p>
           </div>
 

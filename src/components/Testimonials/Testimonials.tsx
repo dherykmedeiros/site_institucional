@@ -1,34 +1,25 @@
 import styles from "./Testimonials.module.css";
+import { defaultContent } from "@/lib/defaultContent";
 
-const featured = {
-  text: "Contratamos o treinamento in-company de NR-10 e NR-35 com a CENADT. O conhecimento dos instrutores, todos veteranos de resgate militar, fez total diferença na postura de segurança dos nossos colaboradores. Recomendo fortemente!",
-  name: "Davi Silveira",
-  role: "Gerente de EHS — Indústria Metalúrgica Ceará",
-};
+interface TestimonialsProps {
+  testimonials?: typeof defaultContent.testimonials;
+}
 
-const smallQuotes = [
-  {
-    text: "Fiz minha formação de Bombeira Civil na CENADT e hoje já estou inserida no mercado, atuando em um grande shopping center em Fortaleza. A infraestrutura prática de simulação é sensacional.",
-    name: "Bruna Lemos",
-    role: "Bombeira Civil Certificada",
-  },
-  {
-    text: "O projeto de segurança contra incêndio da nossa sede comercial foi totalmente elaborado pela CENADT. Aprovado pelo Corpo de Bombeiros sem nenhuma pendência. Excelência técnica!",
-    name: "Carlos Mendes",
-    role: "Diretor Técnico — Horizon Incorporações",
-  },
-];
+export default function Testimonials({ testimonials }: TestimonialsProps) {
+  const overline = testimonials?.overline ?? defaultContent.testimonials.overline;
+  const title = testimonials?.title ?? defaultContent.testimonials.title;
+  const subtitle = testimonials?.subtitle ?? defaultContent.testimonials.subtitle;
+  const featured = testimonials?.featured ?? defaultContent.testimonials.featured;
+  const smallQuotes = testimonials?.smallQuotes ?? defaultContent.testimonials.smallQuotes;
 
-export default function Testimonials() {
   return (
     <section id="depoimentos" className={styles.testimonials}>
       <div className="container">
         <div className={styles.header}>
-          <span className={styles.overline}>Depoimentos</span>
-          <h2 className={styles.title}>Quem Confia na CENADT</h2>
+          <span className={styles.overline}>{overline}</span>
+          <h2 className={styles.title}>{title}</h2>
           <p className={styles.subtitle}>
-            Confira as opiniões de profissionais formados e gestores de empresas
-            que elevaram seus padrões de segurança com nossas soluções.
+            {subtitle}
           </p>
         </div>
 

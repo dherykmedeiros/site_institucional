@@ -1,31 +1,41 @@
 import styles from "./Cta.module.css";
+import { defaultContent } from "@/lib/defaultContent";
 
-export default function Cta() {
+interface CtaProps {
+  cta?: typeof defaultContent.cta;
+}
+
+export default function Cta({ cta }: CtaProps) {
+  const overline = cta?.overline ?? defaultContent.cta.overline;
+  const title = cta?.title ?? defaultContent.cta.title;
+  const desc = cta?.desc ?? defaultContent.cta.desc;
+  const whatsappUrl = cta?.whatsappUrl ?? defaultContent.cta.whatsappUrl;
+  const phoneUrl = cta?.phoneUrl ?? defaultContent.cta.phoneUrl;
+  const phoneLabel = cta?.phoneLabel ?? defaultContent.cta.phoneLabel;
+
   return (
     <section id="cta" className={styles.cta}>
       <div className="container">
         <div className={styles.inner}>
-          <span className={styles.overline}>Pronto para Começar?</span>
+          <span className={styles.overline}>{overline}</span>
           <h2 className={styles.title}>
-            Garanta a segurança e conformidade da sua empresa
+            {title}
           </h2>
           <p className={styles.desc}>
-            Converse diretamente com um de nossos consultores técnicos. Tire
-            dúvidas sobre cursos, solicite orçamentos para treinamentos
-            in-company ou agende a elaboração do seu projeto contra incêndio.
+            {desc}
           </p>
 
           <div className={styles.buttonGroup}>
             <a
-              href="https://api.whatsapp.com/send?phone=5585999000534"
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.btnWhatsapp}
             >
               Falar no WhatsApp
             </a>
-            <a href="tel:+5585999000534" className={styles.btnSecondary}>
-              Ligar: (85) 99900-0534
+            <a href={phoneUrl} className={styles.btnSecondary}>
+              {phoneLabel}
             </a>
           </div>
         </div>

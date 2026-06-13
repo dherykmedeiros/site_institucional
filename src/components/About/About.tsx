@@ -1,51 +1,44 @@
 import styles from "./About.module.css";
+import { defaultContent } from "@/lib/defaultContent";
 
-export default function About() {
+interface AboutProps {
+  about?: typeof defaultContent.about;
+}
+
+export default function About({ about }: AboutProps) {
+  const overline = about?.overline ?? defaultContent.about.overline;
+  const title = about?.title ?? defaultContent.about.title;
+  const paragraphs = about?.paragraphs ?? defaultContent.about.paragraphs;
+  const stats = about?.stats ?? defaultContent.about.stats;
+
   return (
     <section id="sobre" className={styles.about}>
       <div className="container">
         <div className={styles.grid}>
           {/* Left — Text */}
           <div className={styles.content}>
-            <span className={styles.overline}>Sobre Nós</span>
+            <span className={styles.overline}>{overline}</span>
             <h2 className={styles.title}>
-              Formando profissionais que salvam vidas desde 2016
+              {title}
             </h2>
-            <p className={styles.paragraph}>
-              Fundado em setembro de 2016 em Maranguape, Ceará, o CENADT — Centro
-              Avançado de Treinamentos &amp; Serviços — nasceu com a missão de
-              elevar o padrão da educação profissional e dos serviços técnicos de
-              segurança no Nordeste do Brasil.
-            </p>
-            <p className={styles.paragraph}>
-              Nosso corpo docente é composto por engenheiros de segurança,
-              especialistas certificados e veteranos das forças de salvamento e
-              segurança pública. Aliamos teoria rigorosa a simulações práticas
-              realistas, garantindo que profissionais e empresas estejam preparados
-              para qualquer cenário de emergência.
-            </p>
+            {paragraphs.map((p, i) => (
+              <p key={i} className={styles.paragraph}>
+                {p}
+              </p>
+            ))}
           </div>
 
           {/* Right — Stats */}
           <div className={styles.statsStack}>
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>+5.000</span>
-              <span className={styles.statLabel}>Profissionais Certificados</span>
-            </div>
-
-            <hr className={styles.divider} />
-
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>2016</span>
-              <span className={styles.statLabel}>Ano de Fundação</span>
-            </div>
-
-            <hr className={styles.divider} />
-
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>100%</span>
-              <span className={styles.statLabel}>Conformidade Normativa</span>
-            </div>
+            {stats.map((stat: any, i) => (
+              <div key={i}>
+                {i > 0 && <hr className={styles.divider} />}
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>{stat.number}</span>
+                  <span className={styles.statLabel}>{stat.label}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

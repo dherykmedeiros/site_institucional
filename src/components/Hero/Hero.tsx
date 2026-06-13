@@ -1,35 +1,35 @@
 import styles from "./Hero.module.css";
+import { defaultContent } from "@/lib/defaultContent";
 
-const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5585999000534";
+interface HeroProps {
+  general?: typeof defaultContent.general;
+  hero?: typeof defaultContent.hero;
+}
 
-const STATS = [
-  { value: "2016", label: "Anos de Mercado" },
-  { value: "+5.000", label: "Certificados Emitidos" },
-  { value: "100%", label: "Conformidade NRs" },
-];
+export default function Hero({ general, hero }: HeroProps) {
+  const whatsappUrl = general?.whatsappUrl ?? defaultContent.general.whatsappUrl;
+  const overline = hero?.overline ?? defaultContent.hero.overline;
+  const title = hero?.title ?? defaultContent.hero.title;
+  const subtitle = hero?.subtitle ?? defaultContent.hero.subtitle;
+  const stats = hero?.stats ?? defaultContent.hero.stats;
 
-export default function Hero() {
   return (
     <section id="inicio" className={styles.hero}>
       <div className={styles.heroInner}>
         {/* Left Column */}
         <div className={styles.content}>
           <span className={styles.overline}>
-            Centro Avançado de Treinamentos
+            {overline}
           </span>
 
           <div className={styles.divider} />
 
           <h1 className={styles.title}>
-            Qualidade na formação,{" "}
-            <span className={styles.titleAccent}>sucesso</span> na profissão
+            {title}
           </h1>
 
           <p className={styles.subtitle}>
-            Formamos profissionais preparados para atuar com segurança e
-            excelência. Cursos de NR-10, NR-35, NR-33, brigada de incêndio e
-            consultoria especializada em segurança do trabalho para empresas de
-            todo o Ceará.
+            {subtitle}
           </p>
 
           <div className={styles.actions}>
@@ -37,7 +37,7 @@ export default function Hero() {
               Ver Cursos
             </a>
             <a
-              href={WHATSAPP_URL}
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.btnSecondary}
@@ -50,7 +50,7 @@ export default function Hero() {
         {/* Right Column */}
         <div className={styles.aside}>
           <div className={styles.statsCard}>
-            {STATS.map((stat) => (
+            {stats.map((stat) => (
               <div key={stat.label} className={styles.statItem}>
                 <div className={styles.statValue}>{stat.value}</div>
                 <div className={styles.statLabel}>{stat.label}</div>
